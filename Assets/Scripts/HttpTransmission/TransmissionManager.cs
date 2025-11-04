@@ -18,8 +18,8 @@ public class TransmissionManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(FetchJsonValue());
-        GameObject.Find("GetButton").GetComponent<Button>().onClick.AddListener(GetData);
+        // StartCoroutine(FetchJsonValue());
+        // GameObject.Find("GetButton").GetComponent<Button>().onClick.AddListener(GetData);
     }
 
     void GetData() => StartCoroutine(FetchJsonValue());

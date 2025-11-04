@@ -1,12 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
+using NUnit.Framework;
 
-public enum affectedPrice{
-    Asking_Price =0, // 최초 제시가
-    Purchase_Price =1, // 구매가
-    Appraised_Price =2, // 감정가
-    Selling_Price =3  // 최종 판매가
-};
+// ======================================================
+// ENUM 정의
+// ======================================================
+public enum AffectedPrice
+{
+    AskingPrice = 0,     // 최초 제시가
+    PurchasePrice = 1,   // 구매가
+    AppraisedPrice = 2,  // 감정가
+    SellingPrice = 3     // 최종 판매가
+}
 
 public enum ItemState
 {
@@ -14,8 +19,8 @@ public enum ItemState
     OnDisplay = 1,       // 전시 중
     UnderRestoration = 2,// 복원 중
     OnAuction = 3,       // 경매 중
-    Sold = 4             // 판매됨
-};
+    Sold = 4             // 판매 완료
+}
 
 public enum Grade
 {
@@ -23,103 +28,389 @@ public enum Grade
     Rare = 1,        // 레어
     Unique = 2,      // 유니크
     Legendary = 3    // 레전더리
-};
-// 서버 -> 클라 전송용
-[System.Serializable]
-public class GameSessionData{
-    // 플레이어 테이블
-    public string sessionToken; // 세션 토큰 << 구분자
-    public string playerId; // 플레이어 고유 ID
-    // 게임 세션 테이블
-    public int dayCount; // 게임 진행 일수
-    public int money; // 잔금
-    public int personalDebt; // 남은 개인 빚
-    public int pawnshopDebt; // 남은 전당포 빚
-    public int unlockedShowcaseCount; // 해금된 쇼케이스 수
-    public string nickname; // 플레이어 닉네임
-    public string shopName; // 상점 이름
-    public int gameEndDayCount; // 게임 종료 시 일수
-    public string gameEndDate; // 게임 종료 시 날짜
 }
 
+// ======================================================
+// 플레이어 및 세션 관련
+// ======================================================
+
 [System.Serializable]
-public class ItemData
+public class PlayerRegisterLoginRequest
 {
-    public int itemKey; // 아이템 키 << 구분자
-    // ITEM_CATALOG 테이블
-    public string itemName; // 아이템 이름
-    public string imgId; // 아이템 이미지 아이디 ITM00001~ITM99999
-    public string itemCategoryName; // 아이템 카테고리 이름
-    // EXISTING_ITEM 테이블
-    public int grade; // 아이템 등급
-    public int foundGrade; // 발견된 아이템 등급
-    public int flawEa; // 아이템 흠 개수
-    public int foundFlawEa; // 발견된 흠 개수
-    public float suspiciousFlawAura; // 수상한 흠 기운
-    public bool authenticity; // 진위 여부
-    public bool isAuthenticityFound; // 진위 여부 발견 여부
-    public int itemState; // 아이템 상태
+    public string playerId;
+    public string password;
+}
+
+// POST /player/login
+// POST /game-session/new
+// POST /game-session/latest
+[System.Serializable]
+public class GameSessionData
+{
+    public string sessionToken;  
+    public string playerId;      
+    public int dayCount;         
+    public int money;            
+    public int personalDebt;     
+    public int pawnshopDebt;     
+    public int unlockedShowcaseCount; 
+    public string nickname;      
+    public string shopName;      
+    public int gameEndDayCount;  
+    public string gameEndDate;   
+}
+// 중앙에서 static으로 관리할 데이터
+
+// ======================================================
+// 카탈로그 데이터 (초기 로드)
+// ======================================================
+[System.Serializable]
+public class ItemCatalogData
+{
+    public int itemCatalogKey;
+    public string itemCatalogName;
+    public string imgId;
+    public string categoryName; 
 }
 
 [System.Serializable]
-public class CustomerData{
-    // CUSTOMER_CATALOG 테이블
-    public int customerKey; // 고객 키
-    public string customerName; // 고객 이름
-    public string favoriteCategoryName; // 고객 선호 카테고리 이름
-    public string imgId; // 고객 이미지 아이디 CUS00001~CUS99999
-    public float fraud; // 사기꾼 기질
-    public float wellCollect; // 수집력
-    public float clumsy; // 서투름
-    // CUSTOMER_HIDDEN_DISCOVERED_IN_GAME_SESSION 테이블
-    public bool isFraudDiscovered; // 사기꾼 기질 발견 여부 << 서버에서 000 파싱해서 bool 변환해서 줌
-    public bool isWellCollectDiscovered; // 수집력 발견 여부
-    public bool isClumsyDiscovered; // 서투름 발견 여부
+public class CustomerCatalogData
+{
+    public int customerKey;
+    public string customerName;
+    public string favoriteCategoryName;
+    public string imgId;
 }
 
 [System.Serializable]
-public class DealData{
-    public int drcKey; // 거래 키 << 구분자
-    public int askingPrice; // 최초 제시가
-    public int purchasePrice; // 구매가
-    public int appraisedPrice; // 감정가
-    public int sellingPrice; // 최종 판매가
-    public int boughtDate; // 구매한 게임 내 일수
-    public int soldDate; // 판매한 게임 내 일수
-    public CustomerData sellerData; // 판매자 고객 데이터
-    public CustomerData buyerData; // 구매자 고객 데이터
-    public ItemData itemData; // 아이템 데이터
+public class InitialCatalogResponse
+{
+    public List<ItemCatalogData> itemCatalogs;
+    public List<CustomerCatalogData> customerCatalogs;
+}
+// 중앙에서 static으로 관리할 데이터
+
+// ======================================================
+// 전시장 아이템 조회
+// GET /display/currentAll
+// ======================================================
+[System.Serializable]
+public class DisplayedItemData
+{
+    public int displayPositionKey;
+    public int askingPrice;
+    public int purchasePrice;
+    public int appraisedPrice;
+    public int boughtDate;
+    public string sellerName;
+    public Grade foundGrade;
+    public int foundFlawEa;
+    public int authenticity; // -1=미발견,0=가짜,1=진짜
+    public ItemState itemState;
+    public int itemKey;
+    public int itemCatalogKey;
 }
 
 [System.Serializable]
-public class ItemDisplayData{
-    public int displayPositionKey; // 전시 위치 키 << 구분자
-    public ItemData itemData; // 전시된 아이템 데이터
+public class ItemDisplaysWrapData
+{
+    public List<DisplayedItemData> displays;
 }
 
+// ======================================================
+// 뉴스 (당일 이벤트)
+// GET /news/current
+// ======================================================
 [System.Serializable]
-public class NewsData{
+public class NewsData
+{
     public string newsDescription;
     public int affectedPrice;
-    public string affectedCategoryName; // 영향을 받은 카테고리 이름
-    public int amount; // +/- amount 만큼. 서버에서 +30, -70 처리한 후 보내야 함
+    public string affectedCategoryName;
+    public int amount;
 }
 
 [System.Serializable]
-public class LoanData{ // 클라 -> 서버 전송용. (for Update)
-    public string debtType; // 빚 종류 (PERSONAL/PAWNSHOP)
-    public int Amount; // 대출/상환 금액 (+/-)
+public class NewsWrapData
+{
+    public List<NewsData> newsList;
+}
+
+// ======================================================
+// 고객 정보 공개
+// PATCH /customer/reveal (POST 대체 가능)
+// ======================================================
+[System.Serializable]
+public class RevealCustomerRequest
+{
+    public string sessionToken;
+    public int customerKey;
+    public string attribute; // FRAUD, WELL_COLLECT, CLUMSY
 }
 
 [System.Serializable]
-public class ServerTransferData{ // 클라 -> 서버 전송용
-    public string sessionToken; // 세션 토큰 << 구분자
-    public GameSessionData gameSessionData; // 게임 세션 데이터
-    public ItemData itemDataList;// 아이템 데이터
-    public CustomerData customerDataList; // 고객 데이터
-    public DealData dealDataList; // 거래 내역
-    public LoanData loanDataList; // 대출/상환 내역
-    public List<ItemDisplayData> itemDisplayDataList; // 전시된 아이템 데이터 리스트
-    public List<NewsData> newsDataList; // 뉴스 데이터 리스트 0~3개
+public class RevealCustomerResponse
+{
+    public string attribute; // FRAUD, WELL_COLLECT, CLUMSY
+    public float value; // 0.0~1.0
+    public int leftMoney; // 액션 후 남은 돈
 }
 
+// ======================================================
+// 아이템 힌트
+// GET /item/getHints
+// ======================================================
+[System.Serializable]
+public class ItemHintRequest
+{
+    public string sessionToken;
+    public int itemKey;
+}
+
+[System.Serializable]
+public class ItemHintResponse
+{
+    public string hintName;
+    public string hintValue;
+    public int leftMoney;
+}
+
+// ======================================================
+// 거래 생성 및 액션
+// POST /deal/generateDailyDeals
+// POST /deal/action
+// ======================================================
+[System.Serializable]
+public class DealData
+{
+    public int drcKey;
+    public int askingPrice;
+    public int purchasePrice;
+    public int appraisedPrice;
+    public int itemKey;
+    public int itemCatalogKey;
+    public int foundGrade;
+    public int foundFlawEa;
+    public bool isAuthenticityFound;
+    public int customerKey;
+}
+
+[System.Serializable]
+public class DailyDealsWrapData
+{
+    public List<DealData> dailyDeals;
+}
+
+[System.Serializable]
+public class DealActionRequest
+{
+    public string sessionToken;
+    public int drcKey;
+    public string actionType; // FINDFLAW, AUTHCHECK, APPRAISE
+    public int actionLevel;   // 1~3
+}
+
+[System.Serializable]
+public class DealActionResponse
+{
+    public int totalPurchasePrice;
+    public int totalAppraisedPrice;
+    public string changedPurchasedPriceByAction;
+    public string changedAppraisedPriceByAction;
+    public Grade foundGrade;
+    public int foundFlawEa;
+    public bool isAuthenticityFound;
+    public int leftMoney;
+}
+
+// ======================================================
+// 거래 성사 / 거부
+// POST /deal/complete
+// POST /deal/cancel
+// ======================================================
+[System.Serializable]
+public class DealCompleteRequest
+{
+    public string sessionToken;
+    public int drcKey;
+    public int itemKey;
+}
+
+[System.Serializable]
+public class DealCompleteResponse
+{
+    public int leftMoney;
+    public DisplayedItemData displayedItem;
+}
+
+// ======================================================
+// 아이템 복원 / 경매
+// POST /item/action
+// POST /item/result
+// ======================================================
+[System.Serializable]
+public class ItemActionRequest
+{
+    public string sessionToken;
+    public string actionType; // restore, auction
+    public int itemKey;
+}
+
+[System.Serializable]
+public class ItemActionResponse
+{
+    public ItemState itemState;
+}
+
+[System.Serializable]
+public class ItemActionResultRequest
+{
+    public string sessionToken;
+    public List<int> actionResultItemKeys;
+}
+
+[System.Serializable]
+public class ActionItemData
+{
+    public int itemKey;
+    public int itemState;
+    public string resultMoney;
+    public int appraisedPrice;
+    public int purchasePrice;
+}
+
+[System.Serializable]
+public class ItemActionResultResponse
+{
+    public List<ActionItemData> actionResults;
+    public int leftMoney;
+}
+
+// ======================================================
+// 아이템 판매
+// POST /item/sellStart
+// POST /item/sellComplete
+// ======================================================
+[System.Serializable]
+public class SellStartRequest
+{
+    public string sessionToken;
+    public int itemKey;
+    public int customerKey;
+}
+
+[System.Serializable]
+public class SellStartResponse
+{
+    public int sellingPrice;
+}
+
+[System.Serializable]
+public class SellCompleteRequest
+{
+    public string sessionToken;
+    public int itemKey;
+    public int customerKey;
+}
+
+[System.Serializable]
+public class SellCompleteResponse
+{
+    public string earnedAmount;
+    public int leftMoney;
+    public int displayedPositionKey;
+}
+
+// ======================================================
+// 대출 / 상환
+// POST /loan/update
+// ======================================================
+[System.Serializable]
+public class LoanUpdateRequest
+{
+    public string sessionToken;
+    public string debtType; // PERSONAL / PAWNSHOP
+    public int amount;
+}
+
+[System.Serializable]
+public class LoanUpdateResponse
+{
+    public string debtType;
+    public int leftDebtAmount;
+    public int leftMoney;
+}
+
+// ======================================================
+// 하루 종료 (정산)
+// POST /day/next
+// ======================================================
+[System.Serializable]
+public class DailyTransactionSummary
+{
+    public int startMoney;
+    public int boughtSum;
+    public int soldSum;
+    public int interest;
+    public int weeklyInterest;
+    public int finalMoney;
+}
+
+[System.Serializable]
+public class DayNextResponse
+{
+    public int dayCount;
+    public int leftMoney;
+    public int personalDebt;
+    public int pawnshopDebt;
+    public DailyTransactionSummary dailyTransactionSummary;
+}
+// ======================================================
+// 게임 끝 확인
+// POST /game/checkEnd
+// ======================================================
+
+[System.Serializable]
+public class GameCheckEndRequest
+{
+    public string sessionToken;
+}
+
+[System.Serializable]
+public class GameCheckEndResponse
+{
+    public bool isGameEnded; // true: 게임 종료, false: 계속 진행
+    public bool isGameOvered; // true: 파산으로 게임 오버. false: 성공적으로 게임 클리어
+    public WorldRecordData worldRecord;
+}
+
+// ======================================================
+// 세계 기록 조회 (랭킹)
+// GET /worldRecords
+// ======================================================
+[System.Serializable]
+public class WorldRecordData
+{
+    public string playerId;
+    public string nickname;
+    public string pawnshopName;
+    public int clearDayCount;
+    public string clearDate;
+    public int largestProfit;
+}
+
+[System.Serializable]
+public class WorldRecordResponse
+{
+    public List<WorldRecordData> worldRecords;
+}
+
+// ======================================================
+// 에러 응답
+// 모든 400 Bad Request 공통
+// ======================================================
+[System.Serializable]
+public class ErrorResponse
+{
+    public string error;
+}
