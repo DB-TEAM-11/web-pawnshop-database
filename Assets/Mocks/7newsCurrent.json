@@ -1,0 +1,22 @@
+{
+  "newsList": [
+    {
+      "newsDescription": "시계 판매 부진, 가격 조정",
+      "affectedPrice": 3,
+      "affectedCategoryName": "시계",
+      "amount": "-30"
+    },
+    {
+      "newsDescription": "유물 복원 완료로 감정가 상승",
+      "affectedPrice": 2,
+      "affectedCategoryName": "유물",
+      "amount": "+70"
+    },
+    {
+      "newsDescription": "조각상 희귀 매물 등장, 매입가 급등",
+      "affectedPrice": 1,
+      "affectedCategoryName": "조각상",
+      "amount": "+20"
+    }
+  ]
+}

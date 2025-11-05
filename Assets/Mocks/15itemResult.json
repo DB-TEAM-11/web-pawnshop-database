@@ -1,0 +1,26 @@
+{
+  "actionResults": [
+    {
+      "itemKey": 301,
+      "itemState": 1,
+      "resultMoney": "-1500",
+      "appraisedPrice": 2000,
+      "purchasePrice": 1800
+    },
+    {
+      "itemKey": 302,
+      "itemState": 3,
+      "resultMoney": "0",
+      "appraisedPrice": 1500,
+      "purchasePrice": 1300
+    },
+    {
+      "itemKey": 303,
+      "itemState": 1,
+      "resultMoney": "+1500",
+      "appraisedPrice": 1500,
+      "purchasePrice": 1300
+    }
+  ],
+  "leftMoney": 50200
+}

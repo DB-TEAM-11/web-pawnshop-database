@@ -19,7 +19,8 @@ public enum ItemState
     OnDisplay = 1,       // 전시 중
     UnderRestoration = 2,// 복원 중
     OnAuction = 3,       // 경매 중
-    Sold = 4             // 판매 완료
+    Sold = 4,             // 판매 완료
+    AfterRestoration = 5  // 복원 완료
 }
 
 public enum Grade
@@ -127,7 +128,7 @@ public class NewsData
     public string newsDescription;
     public int affectedPrice;
     public string affectedCategoryName;
-    public int amount;
+    public string amount;
 }
 
 [System.Serializable]

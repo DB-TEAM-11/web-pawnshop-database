@@ -1,0 +1,17 @@
+{
+  "leftMoney": 35670,
+  "displayedItem": {
+    "displayPositionKey": 3,
+    "askingPrice": 1000,
+    "purchasePrice": 800,
+    "appraisedPrice": 900,
+    "boughtDate": 57,
+    "sellerName": "김뿡뿡",
+    "foundGrade": 2,
+    "foundFlawEa": 1,
+    "authenticity": 1,
+    "itemState": 1,
+    "itemKey": 301,
+    "itemCatalogKey": 3
+  }
+}

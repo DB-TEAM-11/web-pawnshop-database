@@ -1,0 +1,8 @@
+{
+  "totalPurchasePrice": 1200,
+  "totalAppraisedPrice": 1400,
+  "changedPurchasedPriceByAction": "-200",
+  "changedAppraisedPriceByAction": "+200",
+  "isAuthenticityFound": true,
+  "leftMoney": 49870
+}

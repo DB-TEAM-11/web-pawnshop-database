@@ -1,0 +1,8 @@
+{
+  "totalPurchasePrice": 1500,
+  "totalAppraisedPrice": 2000,
+  "changedPurchasedPriceByAction": "-500",
+  "changedAppraisedPriceByAction": "+100",
+  "foundGrade": 2,
+  "leftMoney": 49850
+}

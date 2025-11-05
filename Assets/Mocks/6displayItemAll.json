@@ -1,0 +1,32 @@
+{
+  "displays": [
+    {
+      "displayPositionKey": 0,
+      "askingPrice": 1000,
+      "purchasePrice": 800,
+      "appraisedPrice": 900,
+      "boughtDate": 1,
+      "sellerName": "심돌멩",
+      "foundGrade": 2,
+      "foundFlawEa": 1,
+      "authenticity": 1,
+      "itemState": 1,
+      "itemKey": 301,
+      "itemCatalogKey": 80
+    },
+    {
+      "displayPositionKey": 1,
+      "askingPrice": 1500,
+      "purchasePrice": 1100,
+      "appraisedPrice": 1400,
+      "boughtDate": 3,
+      "sellerName": "구조각",
+      "foundGrade": 3,
+      "foundFlawEa": 0,
+      "authenticity": -1,
+      "itemState": 2,
+      "itemKey": 302,
+      "itemCatalogKey": 84
+    }
+  ]
+}

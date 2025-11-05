@@ -1,0 +1,14 @@
+{
+  "dayCount": 2,
+  "leftMoney": 48000,
+  "personalDebt": 500000,
+  "pawnshopDebt": 45000,
+  "dailyTransactionSummary": {
+    "startMoney": 50000,
+    "boughtSum": 3000,
+    "soldSum": 4500,
+    "interest": -5000,
+    "weeklyInterest": -1500,
+    "finalMoney": 48000
+  }
+}

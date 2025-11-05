@@ -1,0 +1,40 @@
+{
+  "dailyDeals": [
+    {
+      "drcKey": 201,
+      "askingPrice": 1200,
+      "purchasePrice": 1200,
+      "appraisedPrice": 1200,
+      "itemKey": 301,
+      "itemCatalogKey": 80,
+      "foundGrade": 0,
+      "foundFlawEa": 0,
+      "isAuthenticityFound": false,
+      "customerKey": 3
+    },
+    {
+      "drcKey": 202,
+      "askingPrice": 800,
+      "purchasePrice": 800,
+      "appraisedPrice": 800,
+      "itemKey": 302,
+      "itemCatalogKey": 31,
+      "foundGrade": 0,
+      "foundFlawEa": 0,
+      "isAuthenticityFound": false,
+      "customerKey": 13
+    },
+    {
+      "drcKey": 203,
+      "askingPrice": 1500,
+      "purchasePrice": 1500,
+      "appraisedPrice": 1500,
+      "itemKey": 303,
+      "itemCatalogKey": 61,
+      "foundGrade": 0,
+      "foundFlawEa": 0,
+      "isAuthenticityFound": false,
+      "customerKey": 1
+    }
+  ]
+}

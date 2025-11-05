@@ -1,0 +1,246 @@
+{
+  "itemCatalogs": [
+    {
+      "itemCatalogKey": 83,
+      "itemCatalogName": "SLR 카메라",
+      "imgId": "ITM00031",
+      "categoryName": "카메라"
+    },
+    {
+      "itemCatalogKey": 27,
+      "itemCatalogName": "가죽 갑옷",
+      "imgId": "ITM00016",
+      "categoryName": "방어구"
+    },
+    {
+      "itemCatalogKey": 13,
+      "itemCatalogName": "고급 유리 병",
+      "imgId": "ITM00088",
+      "categoryName": "골동품"
+    },
+    {
+      "itemCatalogKey": 79,
+      "itemCatalogName": "고급시계",
+      "imgId": "ITM00055",
+      "categoryName": "시계"
+    },
+    {
+      "itemCatalogKey": 31,
+      "itemCatalogName": "고대 금화",
+      "imgId": "ITM00013",
+      "categoryName": "화폐"
+    },
+    {
+      "itemCatalogKey": 6,
+      "itemCatalogName": "고대 서책",
+      "imgId": "ITM00006",
+      "categoryName": "고서"
+    },
+    {
+      "itemCatalogKey": 61,
+      "itemCatalogName": "고대 투구",
+      "imgId": "ITM00036",
+      "categoryName": "유물"
+    },
+    {
+      "itemCatalogKey": 84,
+      "itemCatalogName": "고전 카메라",
+      "imgId": "ITM00072",
+      "categoryName": "카메라"
+    },
+    {
+      "itemCatalogKey": 80,
+      "itemCatalogName": "고풍 시계",
+      "imgId": "ITM00022",
+      "categoryName": "시계"
+    },
+    {
+      "itemCatalogKey": 96,
+      "itemCatalogName": "관광 메달",
+      "imgId": "ITM00077",
+      "categoryName": "기념품"
+    },
+    {
+      "itemCatalogKey": 39,
+      "itemCatalogName": "구리 램프",
+      "imgId": "ITM00080",
+      "categoryName": "금속공예품"
+    },
+    {
+      "itemCatalogKey": 25,
+      "itemCatalogName": "궁수의 활",
+      "imgId": "ITM00059",
+      "categoryName": "무기"
+    },
+    {
+      "itemCatalogKey": 75,
+      "itemCatalogName": "금실 자수옷",
+      "imgId": "ITM00043",
+      "categoryName": "의류"
+    },
+    {
+      "itemCatalogKey": 97,
+      "itemCatalogName": "기념 엽서",
+      "imgId": "ITM00046",
+      "categoryName": "기념품"
+    },
+    {
+      "itemCatalogKey": 35,
+      "itemCatalogName": "기념 주화",
+      "imgId": "ITM00054",
+      "categoryName": "화폐"
+    },
+    {
+      "itemCatalogKey": 60,
+      "itemCatalogName": "기병상",
+      "imgId": "ITM00045",
+      "categoryName": "조각상"
+    },
+    {
+      "itemCatalogKey": 30,
+      "itemCatalogName": "기사 장화",
+      "imgId": "ITM00098",
+      "categoryName": "방어구"
+    },
+    {
+      "itemCatalogKey": 91,
+      "itemCatalogName": "기어",
+      "imgId": "ITM00057",
+      "categoryName": "기계장치"
+    },
+    {
+      "itemCatalogKey": 48,
+      "itemCatalogName": "기타",
+      "imgId": "ITM00034",
+      "categoryName": "악기"
+    },
+    {
+      "itemCatalogKey": 15,
+      "itemCatalogName": "나무 항아리",
+      "imgId": "ITM00010",
+      "categoryName": "골동품"
+    }
+  ],
+  "customerCatalogs": [
+    {
+      "customerKey": 1,
+      "customerName": "홍바위",
+      "favoriteCategoryName": "조각상",
+      "imgId": "CIM00018"
+    },
+    {
+      "customerKey": 2,
+      "customerName": "백돋보",
+      "favoriteCategoryName": "가구",
+      "imgId": "CIM00005"
+    },
+    {
+      "customerKey": 3,
+      "customerName": "심돌멩",
+      "favoriteCategoryName": "화폐",
+      "imgId": "CIM00006"
+    },
+    {
+      "customerKey": 4,
+      "customerName": "유나무",
+      "favoriteCategoryName": "그림",
+      "imgId": "CIM00002"
+    },
+    {
+      "customerKey": 5,
+      "customerName": "양베개",
+      "favoriteCategoryName": "예술품",
+      "imgId": "CIM00012"
+    },
+    {
+      "customerKey": 6,
+      "customerName": "방컵라",
+      "favoriteCategoryName": "고서",
+      "imgId": "CIM00010"
+    },
+    {
+      "customerKey": 7,
+      "customerName": "조석유",
+      "favoriteCategoryName": "골동품",
+      "imgId": "CIM00013"
+    },
+    {
+      "customerKey": 8,
+      "customerName": "마쟁반",
+      "favoriteCategoryName": "고서",
+      "imgId": "CIM00002"
+    },
+    {
+      "customerKey": 9,
+      "customerName": "천시계",
+      "favoriteCategoryName": "악기",
+      "imgId": "CIM00010"
+    },
+    {
+      "customerKey": 10,
+      "customerName": "위도끼",
+      "favoriteCategoryName": "도검",
+      "imgId": "CIM00020"
+    },
+    {
+      "customerKey": 11,
+      "customerName": "홍스위",
+      "favoriteCategoryName": "도검",
+      "imgId": "CIM00011"
+    },
+    {
+      "customerKey": 12,
+      "customerName": "구조각",
+      "favoriteCategoryName": "가구",
+      "imgId": "CIM00015"
+    },
+    {
+      "customerKey": 13,
+      "customerName": "정베개",
+      "favoriteCategoryName": "가구",
+      "imgId": "CIM00016"
+    },
+    {
+      "customerKey": 14,
+      "customerName": "노돋보",
+      "favoriteCategoryName": "보석",
+      "imgId": "CIM00019"
+    },
+    {
+      "customerKey": 15,
+      "customerName": "송열쇠",
+      "favoriteCategoryName": "무기",
+      "imgId": "CIM00005"
+    },
+    {
+      "customerKey": 16,
+      "customerName": "정손톱",
+      "favoriteCategoryName": "고서",
+      "imgId": "CIM00003"
+    },
+    {
+      "customerKey": 17,
+      "customerName": "곽돛대",
+      "favoriteCategoryName": "골동품",
+      "imgId": "CIM00006"
+    },
+    {
+      "customerKey": 18,
+      "customerName": "구스위",
+      "favoriteCategoryName": "보석",
+      "imgId": "CIM00012"
+    },
+    {
+      "customerKey": 19,
+      "customerName": "송통조",
+      "favoriteCategoryName": "방어구",
+      "imgId": "CIM00006"
+    },
+    {
+      "customerKey": 20,
+      "customerName": "우고무",
+      "favoriteCategoryName": "그림",
+      "imgId": "CIM00011"
+    }
+  ]
+}
