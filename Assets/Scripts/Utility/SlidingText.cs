@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
-    
+using System;
+
 public class SlidingText : MonoBehaviour
 {
     TMP_Text textComponent;
@@ -9,7 +10,7 @@ public class SlidingText : MonoBehaviour
 
     public void SetFullText(string text)
     {
-        fullText = text;
+        fullText = text + "      ";
     }
     const int displayLength = 8;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,7 +27,8 @@ public class SlidingText : MonoBehaviour
         {
             for (int i = 0; i <= fullText.Length - displayLength; i++)
             {
-                textComponent.text = fullText.Substring(i, displayLength);
+                textComponent.text = fullText.Substring(0, displayLength);
+                fullText = fullText.Substring(1)+fullText.Substring(0,1);
                 yield return new WaitForSeconds(0.2f);
             }
         }

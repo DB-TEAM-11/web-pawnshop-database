@@ -126,7 +126,7 @@ public class ItemDisplaysWrapData
 public class NewsData
 {
     public string newsDescription;
-    public int affectedPrice;
+    public AffectedPrice affectedPrice;
     public string affectedCategoryName;
     public string amount;
 }
