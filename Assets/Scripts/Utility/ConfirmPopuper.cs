@@ -17,7 +17,7 @@ public class ConfirmPopuper : MonoBehaviour
         {
             Debug.LogError("there's no CHECK_POPUP.prefab");
         }
-        if((mainCanvas = SingletonManager.Instance.getMainCanvas()) == null)
+        if((mainCanvas = AYellowpaper.SerializedCollections.SingletonManager.Instance.getMainCanvas()) == null)
         {
             Debug.LogError("can't get mainCanvas by SingletonManager. check ConfirmPopuper");            
         }

@@ -3,17 +3,21 @@ using System.Data.Common;
 using UnityEngine;
 using UnityEditor;
 
+namespace AYellowpaper.SerializedCollections
+{
 public class SingletonManager : MonoBehaviour
 {
     private static SingletonManager instance = null;
 
     [SerializeField] private Canvas mainCanvas;
-    [SerializeField] private Dictionary<int, ItemCatalogData> itemCatalogMap =  
-                        new Dictionary<int, ItemCatalogData>();
-    [SerializeField] private Dictionary<int, CustomerCatalogData> customerCatalogMap =  
-                        new Dictionary<int, CustomerCatalogData>();
 
-    private CustomerState isCustomerDealState;
+    [SerializedDictionary("itemKey","ItemCatalogData")] // 얘는 데이터 저장용 dict
+    public SerializedDictionary<int, ItemCatalogData> itemCatalogMap = new SerializedDictionary<int, ItemCatalogData>();
+    [SerializedDictionary("customerKey","CustomerCatalogData")] // 얘는 데이터 저장용 dict
+    public SerializedDictionary<int, CustomerCatalogData> customerCatalogMap = new SerializedDictionary<int, CustomerCatalogData>();
+
+
+    private CustomerState isCustomerDealState = CustomerState.Deal;
 
     public CustomerState IsCustomerDealState
     {
@@ -33,6 +37,11 @@ public class SingletonManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
+
+            // 나중에 이거 데이웨이브매니저에서 실행해야하는 거 알지?
+            TextAsset jsonFile = (TextAsset)AssetDatabase.LoadAssetAtPath("Assets/Mocks/5initialCatalog.json", typeof(TextAsset));
+            InitialCatalogResponse displayWrap =JsonUtility.FromJson<InitialCatalogResponse>(jsonFile.text);
+            InitCatalogMaps(displayWrap);
         }
         else
         {
@@ -60,10 +69,6 @@ public class SingletonManager : MonoBehaviour
 
     void Start()
     {
-        // 나중에 이거 데이웨이브매니저에서 실행해야하는 거 알지?
-        TextAsset jsonFile = (TextAsset)AssetDatabase.LoadAssetAtPath("Assets/Mocks/5initialCatalog.json", typeof(TextAsset));
-        InitialCatalogResponse displayWrap =JsonUtility.FromJson<InitialCatalogResponse>(jsonFile.text);
-        InitCatalogMaps(displayWrap);
     }
 
 
@@ -87,4 +92,5 @@ public class SingletonManager : MonoBehaviour
     {
         return customerCatalogMap[customerKey];
     }
+}
 }

@@ -12,19 +12,22 @@ public class ToggleObjs : MonoBehaviour
 {
     [SerializeField] private GameObject dealObjs;
     [SerializeField] private GameObject sellObjs;
+    [SerializeField] private GameObject deseBlackFilter;
     [SerializeField] private GameObject newsObjs;
     [SerializeField] private GameObject newsButton;
     [SerializeField] private GameObject newsBlackFilter;
 
     public void ToggleDealSellObjs()
     {
-        if(SingletonManager.Instance.IsCustomerDealState == CustomerState.Deal)
+        if(AYellowpaper.SerializedCollections.SingletonManager.Instance.IsCustomerDealState == CustomerState.Deal)
         {
+            deseBlackFilter.SetActive(!deseBlackFilter.activeSelf);
             dealObjs.SetActive(!dealObjs.activeSelf);
         }
-        else if(SingletonManager.Instance.IsCustomerDealState == CustomerState.Sell)
+        else if(AYellowpaper.SerializedCollections.SingletonManager.Instance.IsCustomerDealState == CustomerState.Sell)
         {
-            dealObjs.SetActive(!dealObjs.activeSelf);
+            deseBlackFilter.SetActive(!deseBlackFilter.activeSelf);
+            sellObjs.SetActive(!sellObjs.activeSelf);
         }
     }
 

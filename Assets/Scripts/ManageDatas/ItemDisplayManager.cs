@@ -68,48 +68,47 @@ public class ItemDisplayManager : MonoBehaviour
                     break;
             }
             // 아이템 무슨 상태인지 채우기
+
+            // 디스플레이 아이템 정보 패널도 채우기
+                // TODO: 값 채우기
+                string foundAuth="";
+                switch (dData.authenticity)
+                {
+                    case -1:
+                        foundAuth = "미발견";
+                        break;
+                    case 0:
+                        foundAuth = "가품";
+                        break;
+                    case 1:
+                        foundAuth = "진품";
+                        break;
+                }        
+
+            string displayText =$"{iData.itemCatalogName}: [{iData.categoryName}]\n\n"+ // 아이템 이름
+                        $"최초 제시가: {dData.askingPrice}\n"+
+                        $"구매가: {dData.purchasePrice}\n"+
+                        $"감정가: {dData.appraisedPrice}\n"+
+                        $"구매일: {dData.boughtDate}\n"+
+                        $"판매자: {dData.sellerName}\n"+
+                        $"찾은 흠 개수: {dData.foundFlawEa}\n"+
+                        $"찾은 등급: "+dData.foundGrade.ToString()+"\n"+
+                        $"찾은 진위 여부: {foundAuth}";
+
+            displayObjectMap[posKey].transform.parent.GetChild(8+posKey).GetChild(1).GetComponent<TMP_Text>().text = displayText;
+            
             // 활성화
             displayObjectMap[posKey].SetActive(true);
         }
 
-    public void PopupDisplayedItemInformPanel(GameObject itemObj, DisplayedItemData dData)
+    public void PopupDisplayedItemInformPanel(int posKey)
     {
-/*
-[아이템 이름]
-카테고리: %%%
-최초 제시가: $$$$$
-구매가: $$$$
-감정가: $$$$
-구매일: $
-구매자: %%%
-찾은 흠 개수: $
-찾은 등급: %%%
-찾은 진위 여부: %%%
-*/
-        ItemCatalogData icData=SingletonManager.Instance?.GetItemCatalog(dData.itemCatalogKey);
-        // TODO: 값 채우기
-
-        
-
-        string data =$"{icData.itemCatalogName}: [{icData.categoryName}]\n\n"+ // 아이템 이름
-                    $"최초 제시가: {dData.askingPrice}\n"+
-                    $"구매가: {dData.purchasePrice}\n"+
-                    $"감정가: {dData.appraisedPrice}\n"+
-                    $"구매일: {dData.boughtDate}\n"+
-                    $"판매자: {dData.sellerName}\n"+
-                    $"찾은 흠 개수: {dData.foundFlawEa}\n"+
-                    $"찾은 등급: "+dData.foundGrade.ToString()+"\n"+
-                    $"찾은 진위 여부: {dData.authenticity}";
-        
-
-        itemObj.transform.GetChild(3).GetChild(1).GetComponent<TMP_Text>().text = "";
-        // TODO: SetActive(true)
-        itemObj.transform.GetChild(3).gameObject.SetActive(true);        
+        displayObjectMap[posKey].transform.parent.GetChild(8+posKey).gameObject.SetActive(true);        
     }
 
-    public void PopOffInformPanel(GameObject itemObj)
+    public void PopOffInformPanel(int posKey)
     {
-        itemObj.transform.GetChild(3).gameObject.SetActive(false);
+        displayObjectMap[posKey].transform.parent.GetChild(8+posKey).gameObject.SetActive(false);
     }
 
 }
