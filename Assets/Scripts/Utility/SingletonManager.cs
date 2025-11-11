@@ -13,6 +13,20 @@ public class SingletonManager : MonoBehaviour
     [SerializeField] private Dictionary<int, CustomerCatalogData> customerCatalogMap =  
                         new Dictionary<int, CustomerCatalogData>();
 
+    private CustomerState isCustomerDealState;
+
+    public CustomerState IsCustomerDealState
+    {
+        get 
+        {
+            return isCustomerDealState; // 속성 값을 반환
+        }
+        set
+        {
+            isCustomerDealState = value;
+        }
+    }
+
     void Awake()
     {
         if(null == instance)
@@ -46,6 +60,7 @@ public class SingletonManager : MonoBehaviour
 
     void Start()
     {
+        // 나중에 이거 데이웨이브매니저에서 실행해야하는 거 알지?
         TextAsset jsonFile = (TextAsset)AssetDatabase.LoadAssetAtPath("Assets/Mocks/5initialCatalog.json", typeof(TextAsset));
         InitialCatalogResponse displayWrap =JsonUtility.FromJson<InitialCatalogResponse>(jsonFile.text);
         InitCatalogMaps(displayWrap);
