@@ -31,6 +31,13 @@ public enum Grade
     Legendary = 3    // 레전더리
 }
 
+public enum Authenticity
+{
+    Unknown = -1,
+    Real = 1,
+    Fake = 0
+}
+
 // ======================================================
 // 플레이어 및 세션 관련
 // ======================================================
@@ -126,7 +133,7 @@ public class ItemDisplaysWrapData
 public class NewsData
 {
     public string newsDescription;
-    public AffectedPrice affectedPrice;
+    public int affectedPrice;
     public string affectedCategoryName;
     public string amount;
 }
@@ -144,7 +151,6 @@ public class NewsWrapData
 [System.Serializable]
 public class RevealCustomerRequest
 {
-    public string sessionToken;
     public int customerKey;
     public string attribute; // FRAUD, WELL_COLLECT, CLUMSY
 }
@@ -164,7 +170,6 @@ public class RevealCustomerResponse
 [System.Serializable]
 public class ItemHintRequest
 {
-    public string sessionToken;
     public int itemKey;
 }
 
@@ -192,8 +197,11 @@ public class DealData
     public int itemCatalogKey;
     public int foundGrade;
     public int foundFlawEa;
-    public bool isAuthenticityFound;
+    public int isAuthenticityFound;
     public int customerKey;
+    public float revealedFraud; // -1 미열람, float 일반이면 열람 된거
+    public float revealedWellCollect;
+    public float revealedClumsy;
 }
 
 [System.Serializable]
@@ -205,7 +213,6 @@ public class DailyDealsWrapData
 [System.Serializable]
 public class DealActionRequest
 {
-    public string sessionToken;
     public int drcKey;
     public string actionType; // FINDFLAW, AUTHCHECK, APPRAISE
     public int actionLevel;   // 1~3
@@ -218,7 +225,7 @@ public class DealActionResponse
     public int totalAppraisedPrice;
     public string changedPurchasedPriceByAction;
     public string changedAppraisedPriceByAction;
-    public Grade foundGrade;
+    public int foundGrade;
     public int foundFlawEa;
     public bool isAuthenticityFound;
     public int leftMoney;
@@ -232,7 +239,6 @@ public class DealActionResponse
 [System.Serializable]
 public class DealCompleteRequest
 {
-    public string sessionToken;
     public int drcKey;
     public int itemKey;
 }
@@ -252,7 +258,6 @@ public class DealCompleteResponse
 [System.Serializable]
 public class ItemActionRequest
 {
-    public string sessionToken;
     public string actionType; // restore, auction
     public int itemKey;
 }
@@ -266,7 +271,6 @@ public class ItemActionResponse
 [System.Serializable]
 public class ItemActionResultRequest
 {
-    public string sessionToken;
     public List<int> actionResultItemKeys;
 }
 
@@ -295,7 +299,6 @@ public class ItemActionResultResponse
 [System.Serializable]
 public class SellStartRequest
 {
-    public string sessionToken;
     public int itemKey;
     public int customerKey;
 }
@@ -309,7 +312,6 @@ public class SellStartResponse
 [System.Serializable]
 public class SellCompleteRequest
 {
-    public string sessionToken;
     public int itemKey;
     public int customerKey;
 }
@@ -329,7 +331,6 @@ public class SellCompleteResponse
 [System.Serializable]
 public class LoanUpdateRequest
 {
-    public string sessionToken;
     public string debtType; // PERSONAL / PAWNSHOP
     public int amount;
 }
@@ -370,12 +371,6 @@ public class DayNextResponse
 // 게임 끝 확인
 // POST /game/checkEnd
 // ======================================================
-
-[System.Serializable]
-public class GameCheckEndRequest
-{
-    public string sessionToken;
-}
 
 [System.Serializable]
 public class GameCheckEndResponse

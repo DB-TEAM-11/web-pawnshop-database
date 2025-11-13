@@ -26,7 +26,7 @@ public class TvScriptShower : MonoBehaviour
         {
             textDesc = textDesc + "       "+ newsDatas[i].newsDescription;
             textEff=textEff+"       "+newsDatas[i].affectedCategoryName
-                            +SwitchAffectedPrice(newsDatas[i].affectedPrice)
+                            +SwitchAffectedPrice((AffectedPrice)newsDatas[i].affectedPrice)
                             +newsDatas[i].amount+"%";   
         }
         textDescription.GetComponent<SlidingText>().SetFullText(textDesc);

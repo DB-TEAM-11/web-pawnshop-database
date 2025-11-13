@@ -2,9 +2,12 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class ConfirmPopuper : MonoBehaviour
 {
+    private static ConfirmPopuper instance = null;
+
     [SerializeField] GameObject popupUI=null;
     [SerializeField] Canvas mainCanvas=null;
 
@@ -21,19 +24,46 @@ public class ConfirmPopuper : MonoBehaviour
         {
             Debug.LogError("can't get mainCanvas by SingletonManager. check ConfirmPopuper");            
         }
-        PopupCheckPanel("안녕하세요 이건 테스트 메시지입니다, 한번 보내볼게요 뿌뿌뿡");
-
     }
 
-    public void PopupCheckPanel(string log)
+    public void PopupCheckPanel(string log, Action action)
     {
         popupUI.transform.GetChild(3).GetComponent<TMP_Text>().text = log;
         popupInstance=Instantiate(popupUI, mainCanvas.transform);
         popupInstance.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(CloseCheckPanel);
+        if(action != null)
+        {
+            popupInstance.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(()=>action.Invoke());
+        }
     }
 
     void CloseCheckPanel()
     {
         Destroy(popupInstance);
+    }
+
+        void Awake()
+    {
+        if(null == instance)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public static ConfirmPopuper Instance
+    {
+        get
+        {
+            if(null == instance)
+            {
+                return null;
+            }
+            return instance;
+        }
     }
 }

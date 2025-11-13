@@ -67,11 +67,6 @@ public class SingletonManager : MonoBehaviour
         return mainCanvas;
     }
 
-    void Start()
-    {
-    }
-
-
     public void InitCatalogMaps(InitialCatalogResponse catalogs)
     {
         for(int i = 0; i < catalogs.itemCatalogs.Count; i++)

@@ -111,5 +111,10 @@ public class ItemDisplayManager : MonoBehaviour
         displayObjectMap[posKey].transform.parent.GetChild(8+posKey).gameObject.SetActive(false);
     }
 
+    public Dictionary<int, DisplayedItemData> GetItemDisplayMap()
+    {
+        return itemDisplayMap;
+    }
+
 }
 }
