@@ -49,6 +49,13 @@ public class PlayerRegisterLoginRequest
     public string password;
 }
 
+[System.Serializable]
+public class LoginResponse
+{
+    public string sessionToken;
+}
+
+
 // POST /player/login
 // POST /game-session/new
 // POST /game-session/latest

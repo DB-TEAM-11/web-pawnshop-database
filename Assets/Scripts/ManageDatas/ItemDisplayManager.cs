@@ -87,9 +87,9 @@ public class ItemDisplayManager : MonoBehaviour
 
             string displayText =$"{iData.itemCatalogName}: [{iData.categoryName}]\n\n"+ // 아이템 이름
                         $"최초 제시가: {dData.askingPrice}\n"+
-                        $"구매가: {dData.purchasePrice}\n"+
-                        $"감정가: {dData.appraisedPrice}\n"+
-                        $"구매일: {dData.boughtDate}\n"+
+                        $"구매가: {string.Format("{0:#,0}",dData.purchasePrice)} G\n"+
+                        $"감정가: {string.Format("{0:#,0}",dData.appraisedPrice)}\n"+
+                        $"구매일: {string.Format("{0:#,0}",dData.boughtDate)}\n"+
                         $"판매자: {dData.sellerName}\n"+
                         $"찾은 흠 개수: {dData.foundFlawEa}\n"+
                         $"찾은 등급: "+dData.foundGrade.ToString()+"\n"+

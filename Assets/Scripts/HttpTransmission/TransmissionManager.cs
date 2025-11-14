@@ -282,6 +282,9 @@ public class TransmissionManager : MonoBehaviour
                     // 받은 결과물을 결과물 컨테이너 담아서 종료
                     callback(JsonUtility.FromJson<S>(jsonVal));
                 }
+                else{
+                    
+                }
             }
             else // 실패 시
             {

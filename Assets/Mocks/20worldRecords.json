@@ -4,8 +4,8 @@
       "playerId": "king_001",
       "nickname": "PawnMaster",
       "pawnshopName": "Elite Pawns",
-      "gameEndDatyCount": 57,
-      "gameEndDate": "2024-01-15T10:00:00Z",
+      "clearDayCount": 57,
+      "clearDate": "2024-01-15T10:00:00Z",
       "largestProfit": "50000"
     },
     {
