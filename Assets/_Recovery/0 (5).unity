@@ -1197,7 +1197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LoginManager
   LoginResisterObjs: {fileID: 1271316972}
   worldRecordPanel: {fileID: 673759896}
-  inLoginObjs: {fileID: 1674379121}
+  inLoginObjs: {fileID: 0}
   wrldRecordRowPrefab: {fileID: 6104181660341447465, guid: d7d0b729167c0cd4280bb751275bc032, type: 3}
 --- !u!4 &498304021
 Transform:
@@ -1226,7 +1226,7 @@ GameObject:
   - component: {fileID: 592707825}
   - component: {fileID: 592707824}
   m_Layer: 5
-  m_Name: IMG_BG
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2338,7 +2338,7 @@ GameObject:
   - component: {fileID: 897302543}
   - component: {fileID: 897302542}
   m_Layer: 5
-  m_Name: MainCanvas
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2442,7 +2442,7 @@ GameObject:
   - component: {fileID: 938280364}
   - component: {fileID: 938280363}
   m_Layer: 5
-  m_Name: TXT_TITLE_ID
+  m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2566,55 +2566,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 938280361}
   m_CullTransparentMesh: 1
---- !u!1 &949836500
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 949836502}
-  - component: {fileID: 949836501}
-  m_Layer: 0
-  m_Name: SingletonManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &949836501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949836500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3aee0c4cb9d8fe45a9dd8fa38c0e763, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AYellowpaper.SerializedCollections.SingletonManager
-  mainCanvas: {fileID: 897302544}
-  itemCatalogMap:
-    _serializedList: []
-  customerCatalogMap:
-    _serializedList: []
---- !u!4 &949836502
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 949836500}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 974.0201, y: 426.47906, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &961016988
 GameObject:
   m_ObjectHideFlags: 0
@@ -3615,19 +3566,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1182719455}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 498304020}
-        m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
-        m_MethodName: RequestToLogin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1182719455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3926,19 +3865,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1259472896}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 498304020}
-        m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
-        m_MethodName: RequestToLogOut
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1259472896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3992,7 +3919,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1271316973
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4583,7 +4510,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1674379122
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4798,7 +4725,7 @@ GameObject:
   - component: {fileID: 1699307969}
   - component: {fileID: 1699307968}
   m_Layer: 5
-  m_Name: PLR_ID
+  m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5943,19 +5870,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1983785478}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 498304020}
-        m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
-        m_MethodName: RequestToRegister
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1983785478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6004,7 +5919,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1998826356}
   - component: {fileID: 1998826355}
-  - component: {fileID: 1998826357}
   m_Layer: 0
   m_Name: TransmissionManager
   m_TagString: Untagged
@@ -6039,20 +5953,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1998826357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1998826354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db9dfb898713b654e9d43f90b49a8eda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ConfirmPopuper
-  popupUI: {fileID: 0}
-  mainCanvas: {fileID: 0}
 --- !u!1 &2022691696
 GameObject:
   m_ObjectHideFlags: 0
@@ -6434,4 +6334,3 @@ SceneRoots:
   - {fileID: 1998826356}
   - {fileID: 498304021}
   - {fileID: 227368901}
-  - {fileID: 949836502}

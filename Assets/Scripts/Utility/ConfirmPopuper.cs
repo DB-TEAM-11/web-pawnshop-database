@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class ConfirmPopuper : MonoBehaviour
 {
@@ -13,20 +14,7 @@ public class ConfirmPopuper : MonoBehaviour
 
     private GameObject popupInstance;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        if((popupUI = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/CHECK_POPUP.prefab", typeof(GameObject)))==null)
-        {
-            Debug.LogError("there's no CHECK_POPUP.prefab");
-        }
-        if((mainCanvas = AYellowpaper.SerializedCollections.SingletonManager.Instance.getMainCanvas()) == null)
-        {
-            Debug.LogError("can't get mainCanvas by SingletonManager. check ConfirmPopuper");            
-        }
-    }
-
-    public void PopupCheckPanel(string log, Action action)
+    public void PopupCheckPanel(string log, Action action = null)
     {
         popupUI.transform.GetChild(3).GetComponent<TMP_Text>().text = log;
         popupInstance=Instantiate(popupUI, mainCanvas.transform);
@@ -35,6 +23,25 @@ public class ConfirmPopuper : MonoBehaviour
         {
             popupInstance.transform.GetChild(4).GetComponent<Button>().onClick.AddListener(()=>action.Invoke());
         }
+    }
+
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += SetMainCanvas;
+    }
+
+    void SetMainCanvas(Scene scene, LoadSceneMode mode)
+    {
+        if((mainCanvas = AYellowpaper.SerializedCollections.SingletonManager.Instance.getMainCanvas()) == null)
+        {
+            Debug.LogError("can't get mainCanvas by SingletonManager. check ConfirmPopuper");            
+        }
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= SetMainCanvas;
     }
 
     void CloseCheckPanel()
@@ -48,6 +55,16 @@ public class ConfirmPopuper : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
+
+        if((popupUI = (GameObject)AssetDatabase.LoadAssetAtPath("Assets/Prefabs/CHECK_POPUP.prefab", typeof(GameObject)))==null)
+        {
+            Debug.LogError("there's no CHECK_POPUP.prefab");
+        }
+        if((mainCanvas = AYellowpaper.SerializedCollections.SingletonManager.Instance.getMainCanvas()) == null)
+        {
+            Debug.LogError("can't get mainCanvas by SingletonManager. check ConfirmPopuper");            
+        }
+
         }
         else
         {

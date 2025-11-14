@@ -39,6 +39,11 @@ public class TransmissionManager : MonoBehaviour
     public static readonly string serverUrl = "http://localhost:8080"; // 서버 URL
     public static string sessionToken = ""; // 세션 토큰 저장
 
+    public void SetSessionToken(string sessionTokStr)
+    {
+        sessionToken = sessionTokStr;
+    }
+
     public S RequestToServer<T,S>(RequestType reqType,T requestData){
         string routeUrl ="";
         S returnData= default;
@@ -46,15 +51,16 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.REGISTER: // POST /player/register
                 routeUrl = "/player/register";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
-                        returnData = responseData;
+                        // 얘는 결과값을 안 받으니 리스폰스 코드(200,404 ...)로 반환함
+                        returnData = (S)(object)responseCode; // 오브젝트 최상위로 한번 포장하고 제네릭으로 변환
                     }));
                 break;
             case RequestType.LOGIN: // POST /player/login
                 routeUrl = "/player/login";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -62,15 +68,16 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.LOGOUT: // POST /player/logout
                 routeUrl = "/player/logout";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
-                        returnData = responseData;
+                        // 얘는 결과값을 안 받으니 리스폰스 코드(200,404 ...)로 반환함
+                        returnData = (S)(object)responseCode; // 오브젝트 최상위로 한번 포장하고 제네릭으로 변환
                     }));
                 break;
             case RequestType.NEW_SESSION: // POST /game-session/new
                 routeUrl = "/game-session/new";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -78,7 +85,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.LATEST_SESSION: // POST /game-session/latest
                 routeUrl = "/game-session/latest";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -86,7 +93,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.CHECK_END: // POST /game/checkEnd
                 routeUrl = "/game/checkEnd";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -94,7 +101,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.INIT_CATALOGS: // GET /catalog/initialData
                 routeUrl = "/catalog/initialData";
                 StartCoroutine(GetJsonValue<S>(routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -102,7 +109,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.DISPLAY_CUR_ALL: // GET /display/currentAll
                 routeUrl = "/display/currentAll";
                 StartCoroutine(GetJsonValue<S>(routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -110,7 +117,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.NEWS_CUR: // GET /news/current
                 routeUrl = "/news/current";
                 StartCoroutine(GetJsonValue<S>(routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -118,7 +125,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.CUS_REVEAL: // PATCH /customer/reveal
                 routeUrl = "/customer/reveal";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -126,7 +133,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.GET_ITEM_HINTS: // GET /item/getHints
                 routeUrl = "/item/getHints";
                 StartCoroutine(GetJsonValue<S>(routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -134,7 +141,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.ITEM_ACTION: // POST /item/action
                 routeUrl = "/item/action";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -142,7 +149,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.ITEM_RESULT: // POST /item/result
                 routeUrl = "/item/result";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -150,7 +157,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.ITEM_SELL_START: // POST /item/sellStart
                 routeUrl = "/item/sellStart";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -158,7 +165,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.ITEM_SELL_COMPLETE: // POST /item/sellComplete
                 routeUrl = "/item/sellComplete";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -166,7 +173,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.DAILY_DEALS: // POST /deal/generateDailyDeals
                 routeUrl = "/deal/generateDailyDeals";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -174,7 +181,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.DEAL_ACTION: // POST /deal/action
                 routeUrl = "/deal/action";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -182,7 +189,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.DEAL_COMPLETE: // POST /deal/complete
                 routeUrl = "/deal/complete";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -190,7 +197,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.LOAN_UPDATE: // POST /loan/update
                 routeUrl = "/loan/update";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -198,15 +205,16 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.DEAL_CANCEL: // POST /deal/cancel
                 routeUrl = "/deal/cancel";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
-                        returnData = responseData;
+                        // 얘는 결과값을 안 받으니 리스폰스 코드(200,404 ...)로 반환함
+                        returnData = (S)(object)responseCode; // 오브젝트 최상위로 한번 포장하고 제네릭으로 변환
                     }));
                 break;
             case RequestType.DAY_NEXT: // POST /day/next
                 routeUrl = "/day/next";
                 StartCoroutine(PostJsonValue<T,S>(requestData,routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -214,7 +222,7 @@ public class TransmissionManager : MonoBehaviour
             case RequestType.WORLD_RECORDS: // GET /worldRecords
                 routeUrl = "/worldRecords";
                 StartCoroutine(GetJsonValue<S>(routeUrl,
-                    (responseData) =>
+                    (responseCode, responseData) =>
                     {
                         returnData = responseData;
                     }));
@@ -225,7 +233,7 @@ public class TransmissionManager : MonoBehaviour
 
 
     // 인자로 전달한 파라미터에 결과값 담아서 줄게
-    IEnumerator GetJsonValue<S>(string routeUrl, Action<S> callback)
+    IEnumerator GetJsonValue<S>(string routeUrl, Action<int,S> callback)
     {
         string jsonUrl = serverUrl+routeUrl; // ex http://local.host/player/register
         using(UnityWebRequest req  = UnityWebRequest.Get(jsonUrl)) // 여기서는 그냥 선언만 함
@@ -238,16 +246,17 @@ public class TransmissionManager : MonoBehaviour
             else // 성공 시
             {
                 // 결과를 담기
+                int resCode = (int)req.responseCode;
                 string jsonVal = req.downloadHandler.text;
                 // 결과값 담아서 주기
-                callback(JsonUtility.FromJson<S>(jsonVal));
+                callback(resCode,JsonUtility.FromJson<S>(jsonVal));
                 
             }
         }
     }
 
     // 전달할 데이터랑 결과값 받을 데이터 인자로 주세요
-    IEnumerator PostJsonValue<T,S>(T requestData, string routeUrl, Action<S> callback, bool isPatch = false)
+    IEnumerator PostJsonValue<T,S>(T requestData, string routeUrl, Action<int,S> callback, bool isPatch = false)
     {
         // 구조체를 JSON 데이터화 하기
         string jsonData = JsonUtility.ToJson(requestData);
@@ -276,19 +285,20 @@ public class TransmissionManager : MonoBehaviour
             {
                 Debug.Log("Post Data Success");
                 // 다운로드 핸들러에서 결과물 받아 사용
-                if (!string.IsNullOrEmpty(req.downloadHandler.text))
+                if (req.responseCode == 200 && !string.IsNullOrEmpty(req.downloadHandler.text))
                 {
+                    int resCode = (int)req.responseCode;
                     string jsonVal = req.downloadHandler.text;
                     // 받은 결과물을 결과물 컨테이너 담아서 종료
-                    callback(JsonUtility.FromJson<S>(jsonVal));
+                    callback(resCode,JsonUtility.FromJson<S>(jsonVal));
                 }
                 else{
-                    
+                    Debug.LogError("Post Data Error Request 400 500 ...");
                 }
             }
             else // 실패 시
             {
-                Debug.LogError("Post Data Error");
+                Debug.LogError("Post Data Error No Response");
             }
         }
     }

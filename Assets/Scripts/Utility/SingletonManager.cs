@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 namespace AYellowpaper.SerializedCollections
 {
@@ -49,7 +50,22 @@ public class SingletonManager : MonoBehaviour
         }
     }
 
-    public static SingletonManager Instance
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += SetMainCanvas;
+    }
+
+    void SetMainCanvas(Scene scene, LoadSceneMode mode)
+    {
+        mainCanvas = FindFirstObjectByType<Canvas>();
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= SetMainCanvas;
+    }
+
+        public static SingletonManager Instance
     {
         get
         {
