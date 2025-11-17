@@ -14,6 +14,7 @@ public class ItemDisplayManager : MonoBehaviour
     [SerializedDictionary("position key","DisplayData")] // 얘는 데이터 저장용 dict
     public SerializedDictionary<int, DisplayedItemData> itemDisplayMap = new SerializedDictionary<int, DisplayedItemData>();
     // 전시 위치 별 아이템 정보 매핑
+    [SerializeField] ItemActionManager itemActionManager;
 
     private ItemCatalogData iData;
     void Start()
@@ -31,7 +32,7 @@ public class ItemDisplayManager : MonoBehaviour
             itemDisplayMap.Add(displays[i].displayPositionKey,displays[i]);
         }
 
-        // TODO: 아이템 오브젝트에 데이터 적용하기
+        // 아이템 오브젝트에 데이터 적용하기
         for(int posKey = 0; posKey < displays.Count; posKey++)
         {
             // 값이 있으면 true와 해당 value를 담아서 반환하고, 없으면 false를 반환함
@@ -39,14 +40,20 @@ public class ItemDisplayManager : MonoBehaviour
                 ActivateDisplayedItem(posKey, displayedItemData);
             }
         }
+        itemActionManager.OnItemActionTogClicked(true);
+    }
+
+    public void SetItemState(int posKey,ItemState itemState)
+    {
+        itemDisplayMap[posKey].itemState = itemState;
+        ActivateDisplayedItem(posKey, itemDisplayMap[posKey]); // 정보 업데이트
     }
 
     private void ActivateDisplayedItem(int posKey, DisplayedItemData dData)
         {
             // 아이템 이미지 채우기
             iData = SingletonManager.Instance?.GetItemCatalog(dData.itemCatalogKey);
-            displayObjectMap[posKey].transform.GetChild(1).GetComponent<Image>().sprite
-                =Resources.Load<Sprite>($"IMG_ITEM_CATALOG/{iData.imgId}");
+            displayObjectMap[posKey].transform.GetChild(1).GetComponent<Image>().sprite=Resources.Load<Sprite>($"IMG_ITEM_CATALOG/{iData.imgId}");
             displayObjectMap[posKey].transform.GetChild(1).GetComponent<Image>();
             switch (dData.itemState)
             {
@@ -114,6 +121,44 @@ public class ItemDisplayManager : MonoBehaviour
     public Dictionary<int, DisplayedItemData> GetItemDisplayMap()
     {
         return itemDisplayMap;
+    }
+
+    public List<DisplayedItemData> GetRestorableItem()
+    {
+        List<DisplayedItemData> restorableItems = new List<DisplayedItemData>();
+        for(int posKey = 0; posKey < 8; posKey++)
+        {
+            // 값이 있으면 true와 해당 value를 담아서 반환하고, 없으면 false를 반환함
+            if(itemDisplayMap.TryGetValue(posKey, out DisplayedItemData displayedItemData)){
+                // 복원이 가능한 전시중 아이템이면 넣어( 복원완료가 아님)
+                if(displayedItemData.itemState == ItemState.OnDisplay)
+                {
+                    restorableItems.Add(displayedItemData);
+                }
+            }
+        }
+        return restorableItems;
+    }
+
+
+
+
+    public List<DisplayedItemData> GetAuctionableItem()
+    {
+        List<DisplayedItemData> auctionableItems = new List<DisplayedItemData>();
+        for(int posKey = 0; posKey < 8; posKey++)
+        {
+            // 값이 있으면 true와 해당 value를 담아서 반환하고, 없으면 false를 반환함
+            if(itemDisplayMap.TryGetValue(posKey, out DisplayedItemData displayedItemData)){
+                // 경매가 가능한 아이템(전시 중, 복원 후)
+                if(displayedItemData.itemState == ItemState.OnDisplay
+                    || displayedItemData.itemState == ItemState.AfterRestoration)
+                {
+                    auctionableItems.Add(displayedItemData);
+                }
+            }
+        }
+        return auctionableItems;
     }
 
 }

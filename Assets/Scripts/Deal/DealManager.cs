@@ -72,9 +72,10 @@ public class DealManager : MonoBehaviour
 
     public void SetDealPanelToNewData(DealData dData)
     {
+        // 트레이 위 아이템 이미지 활성화
+        trayItemObj.SetActive(true);
         // 고객 설정
         customerObj.SetActive(true);
-        trayItemObj.SetActive(true);
         currentDealData = dData;
         CustomerCatalogData cData =SingletonManager.Instance?.GetCustomerCatalog(dData.customerKey);
         customerObj.GetComponent<Image>().sprite = Resources.Load<Sprite>($"IMG_CUSTOMER/{cData.imgId}");

@@ -234,7 +234,7 @@ public class DealActionResponse
     public string changedAppraisedPriceByAction;
     public int foundGrade;
     public int foundFlawEa;
-    public bool isAuthenticityFound;
+    public int isAuthenticityFound;
     public int leftMoney;
 }
 
@@ -276,19 +276,12 @@ public class ItemActionResponse
 }
 
 [System.Serializable]
-public class ItemActionResultRequest
-{
-    public List<int> actionResultItemKeys;
-}
-
-[System.Serializable]
 public class ActionItemData
 {
     public int itemKey;
     public int itemState;
-    public string resultMoney;
-    public int appraisedPrice;
-    public int purchasePrice;
+    public string resultMoney; // 변화값. 경매면은 벌은 돈. 복원이면 복원 비용
+    public int appraisedPrice; // 감정가 변화비용
 }
 
 [System.Serializable]
@@ -399,7 +392,6 @@ public class WorldRecordData
     public string pawnshopName;
     public int clearDayCount;
     public string clearDate;
-    public int largestProfit;
 }
 
 [System.Serializable]

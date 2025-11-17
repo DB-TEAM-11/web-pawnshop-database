@@ -169,11 +169,8 @@ public class LoginManager : MonoBehaviour
             wrldRecordRow.transform.GetChild(9).GetComponent<TMP_Text>().text
                 = $"{string.Format("{0:#,0}",worldRecordsData.worldRecords[i].clearDayCount)} 일";
             // Date
-            wrldRecordRow.transform.GetChild(10).GetComponent<TMP_Text>().text
-                = worldRecordsData.worldRecords[i].clearDate;
-            // Profit
-            wrldRecordRow.transform.GetChild(11).GetComponent<TMP_Text>().text
-                = $"{string.Format("{0:#,0}",worldRecordsData.worldRecords[i].largestProfit)} G";
+            // wrldRecordRow.transform.GetChild(10).GetComponent<TMP_Text>().text
+            //     = worldRecordsData.worldRecords[i].clearDate;
         }
     }
 

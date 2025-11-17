@@ -5,16 +5,14 @@
       "nickname": "PawnMaster",
       "pawnshopName": "Elite Pawns",
       "clearDayCount": 57,
-      "clearDate": "2024-01-15T10:00:00Z",
-      "largestProfit": "50000"
+      "clearDate": "2024-01-15T10:00:00Z"
     },
     {
       "playerId": "id_002",
       "nickname": "GoldTrader",
       "pawnshopName": "Golden Deals",
       "clearDayCount": 62,
-      "clearDate": "2024-02-10T12:30:00Z",
-      "largestProfit": "60000"
+      "clearDate": "2024-02-10T12:30:00Z"
     }
   ]
 }
