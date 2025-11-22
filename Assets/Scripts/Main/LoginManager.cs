@@ -3,11 +3,21 @@ using UnityEditor;
 using System.Collections.Generic;
 using UnityEditor.Build.Content;
 using TMPro;
+using AYellowpaper.SerializedCollections;
+using Unity.VisualScripting;
 
 public enum LoginState
 {
     LOGIN,
     IN_LOGIN
+}
+
+public enum ResponseCode
+{
+    OK = 200,
+    FORBIDDEN = 403,
+    NOT_FOUND = 404,
+    INTERNAL_SERVER_ERROR = 500
 }
 
 public class LoginManager : MonoBehaviour
@@ -42,40 +52,35 @@ public class LoginManager : MonoBehaviour
     }
 
     public void RequestToLogOut(){
-        // PlayerRegisterLoginRequest requestData = new PlayerRegisterLoginRequest();
-        // requestData.playerId = loginIdTMP.text;
-        // requestData.password = loginPwTMP.text;
-        // LoginResponse responseData =TransmissionManager.Instance.RequestToServer<PlayerRegisterLoginRequest,LoginResponse>(RequestType.LOGIN,requestData);
+        int responseCode = TransmissionManager.Instance.RequestToServer<int, int>(RequestType.LOGOUT,0);
 
-        // responseData= new LoginResponse(); //
-        // responseData.sessionToken = "ang Kimoti"; // <<<<<<<< 확인용 코드
+        // 확인용 코드 <<<<<<<<<<<<<<
+        responseCode = 200;
 
-        // if(responseData != default)
-        // {
-        //     // 로그인 초기화
-        //     playerIdCache =requestData.playerId; // 아이디는 캐시에 저장
-        //     loginIdTMP.text = "";
-        //     loginPwTMP.text = "";
-        //     RegisterIdTMP.text = "";
-        //     RegisterPwTMP.text = "";
-        //     // 트랜스미션에 세션토큰 전달
-        //     TransmissionManager.Instance.SetSessionToken(responseData.sessionToken);
+        if((ResponseCode)responseCode == ResponseCode.OK)
+        {
+            // 로그인 초기화
+            playerIdCache =""; // 캐시 초기화
+            loginIdTMP.text = "";
+            loginPwTMP.text = "";
+            RegisterIdTMP.text = "";
+            RegisterPwTMP.text = "";
+            // 트랜스미션에 세션토큰 전달
+            TransmissionManager.Instance.SetSessionToken(""); // 초기화
 
-        //     // 로그인패널 비활성화, 인로그인패널 활성화
-        //     loginState =LoginState.IN_LOGIN;
-        //     LoginResisterObjs.SetActive(false);
-        //     inLoginObjs.SetActive(true);
+            // 로그인패널 비활성화, 인로그인패널 활성화
+            loginState =LoginState.LOGIN;
+            inLoginObjs.SetActive(false);
+            LoginResisterObjs.SetActive(true);
 
-        //     string log = "로그인 성공";
-        //     ConfirmPopuper.Instance?.PopupCheckPanel(log);            
-        // }
-        // else
-        // {
-        //     // 로그인 실패 처리
-        //     Debug.Log("로그인 실패");
-        //     string log = "로그인 실패.\nID와 PW를 잘 확인해보세요";
-        //     ConfirmPopuper.Instance?.PopupCheckPanel(log);  
-        // }
+            ConfirmPopuper.Instance?.PopupCheckPanel("로그아웃 되었습니다.");    
+        }
+        else
+        {
+            // 로그인 실패 처리
+            Debug.LogError("로그아웃 실패");
+            ConfirmPopuper.Instance?.PopupCheckPanel("내부 동작 오류. 로그아웃 실패");  
+        }
     }
 
 
@@ -86,8 +91,10 @@ public class LoginManager : MonoBehaviour
         requestData.password = loginPwTMP.text;
         LoginResponse responseData =TransmissionManager.Instance.RequestToServer<PlayerRegisterLoginRequest,LoginResponse>(RequestType.LOGIN,requestData);
 
+        // Mock 데이터
         responseData= new LoginResponse(); //
         responseData.sessionToken = "ang Kimoti"; // <<<<<<<< 확인용 코드
+        responseData.hasGameSession = "Y"; // 기존 게임 불러오기, "N"이면 새 게임 생성에 쓸 변수임
 
         if(responseData != default)
         {
@@ -99,6 +106,8 @@ public class LoginManager : MonoBehaviour
             RegisterPwTMP.text = "";
             // 트랜스미션에 세션토큰 전달
             TransmissionManager.Instance.SetSessionToken(responseData.sessionToken);
+            // 게임 세션 있는지 전달
+            SingletonManager.Instance.HasGameSession = responseData.hasGameSession;
 
             // 로그인패널 비활성화, 인로그인패널 활성화
             loginState =LoginState.IN_LOGIN;
@@ -160,17 +169,17 @@ public class LoginManager : MonoBehaviour
             // Nickname
             wrldRecordRow.transform.GetChild(1).GetComponent<TMP_Text>().text
                 = $"#{worldRecordsData.worldRecords[i].playerId}";
-            wrldRecordRow.transform.GetChild(7).GetComponent<TMP_Text>().text
+            wrldRecordRow.transform.GetChild(6).GetComponent<TMP_Text>().text
                 = worldRecordsData.worldRecords[i].nickname;
             // Shopname
-            wrldRecordRow.transform.GetChild(8).GetComponent<TMP_Text>().text
+            wrldRecordRow.transform.GetChild(7).GetComponent<TMP_Text>().text
                 = worldRecordsData.worldRecords[i].pawnshopName;
             // DayCount
-            wrldRecordRow.transform.GetChild(9).GetComponent<TMP_Text>().text
+            wrldRecordRow.transform.GetChild(8).GetComponent<TMP_Text>().text
                 = $"{string.Format("{0:#,0}",worldRecordsData.worldRecords[i].clearDayCount)} 일";
             // Date
-            // wrldRecordRow.transform.GetChild(10).GetComponent<TMP_Text>().text
-            //     = worldRecordsData.worldRecords[i].clearDate;
+            wrldRecordRow.transform.GetChild(9).GetComponent<TMP_Text>().text
+                = worldRecordsData.worldRecords[i].clearDate;
         }
     }
 

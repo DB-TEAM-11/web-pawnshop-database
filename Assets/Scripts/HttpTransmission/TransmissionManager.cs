@@ -258,8 +258,14 @@ public class TransmissionManager : MonoBehaviour
     // 전달할 데이터랑 결과값 받을 데이터 인자로 주세요
     IEnumerator PostJsonValue<T,S>(T requestData, string routeUrl, Action<int,S> callback, bool isPatch = false)
     {
+        // 보낼 데이터가 없으면 requestData 타입을 int로 설정
+        string jsonData = "";
         // 구조체를 JSON 데이터화 하기
-        string jsonData = JsonUtility.ToJson(requestData);
+        if(requestData is not int)
+        {
+            jsonData = JsonUtility.ToJson(requestData);            
+        }
+
 
         // url 설정
         string url= serverUrl+routeUrl;

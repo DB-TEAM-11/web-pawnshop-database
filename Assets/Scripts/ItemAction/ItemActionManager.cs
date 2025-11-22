@@ -8,12 +8,7 @@ using UnityEditor;
 
 public class ItemActionManager : MonoBehaviour
 {
-    [SerializeField] private GameObject newspaperObjs;
-    [SerializeField] private GameObject loanObjs; // 대출 관련 패널 오브젝트
     [SerializeField] private GameObject itemObjs; // 아이템 복원 오브젝트
-    [SerializeField] private GameObject loanPersonalGoldTog;
-    [SerializeField] private GameObject loanShopGoldTog;
-    [SerializeField] private GameObject loanShopActionTog;
     [SerializeField] private GameObject itemActionTog;
     [SerializeField] private GameObject itemListTog;
     [SerializeField] private ItemDisplayManager displayManager;
@@ -26,7 +21,6 @@ public class ItemActionManager : MonoBehaviour
         if(isOn){
             currentClickedItem = actionItemList[itemIndex];
         }
-
     }
 
     public void OnItemActionButtonClicked()

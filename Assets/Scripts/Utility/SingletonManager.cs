@@ -17,6 +17,20 @@ public class SingletonManager : MonoBehaviour
     [SerializedDictionary("customerKey","CustomerCatalogData")] // 얘는 데이터 저장용 dict
     public SerializedDictionary<int, CustomerCatalogData> customerCatalogMap = new SerializedDictionary<int, CustomerCatalogData>();
 
+    private string hasGameSession; // 머스트 Y or N
+    // 만약
+    public string HasGameSession
+    {
+        get 
+        {
+            return hasGameSession; // 게임세션이 있는지?
+        }
+        set
+        {
+            hasGameSession = value; // 만약 게임이 끝나면, 이 정보를 N으로 바꿔야 함
+        }
+    }
+
 
     private CustomerState isCustomerDealState = CustomerState.Deal;
 

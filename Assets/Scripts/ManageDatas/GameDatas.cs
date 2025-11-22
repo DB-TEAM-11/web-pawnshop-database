@@ -53,6 +53,16 @@ public class PlayerRegisterLoginRequest
 public class LoginResponse
 {
     public string sessionToken;
+    public string hasGameSession; // "Y", "N"
+}
+
+
+// POST /game-session/new
+[System.Serializable]
+public class NewGameSessionRequest
+{
+    public string nickname;
+    public string shopName;
 }
 
 
